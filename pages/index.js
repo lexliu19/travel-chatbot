@@ -1,4 +1,3 @@
-// pages/index.js
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -7,9 +6,43 @@ export default function Home() {
   const [chatLog, setChatLog] = useState([]);
 
   const sendMessage = async () => {
-    const response = await axios.post('/api/ask', { question: userInput });
-    setChatLog([...chatLog, { user: userInput, bot: response.data.answer }]);
+    if (userInput.trim() === '') return;
+
+    setChatLog([...chatLog, { user: userInput, bot: '🤔...' }]);
+    const currentUserInput = userInput;
     setUserInput('');
+
+    try {
+      const response = await axios.post('/api/ask', {
+        question: currentUserInput,
+      });
+
+      setChatLog((prevChatLog) =>
+        prevChatLog.map((entry, index) =>
+          index === prevChatLog.length - 1
+            ? { ...entry, bot: response.data.answer }
+            : entry
+        )
+      );
+    } catch (error) {
+      console.error('Error fetching the answer:', error);
+      setChatLog((prevChatLog) =>
+        prevChatLog.map((entry, index) =>
+          index === prevChatLog.length - 1
+            ? {
+                ...entry,
+                bot: 'Sorry, something went wrong. Please try again.',
+              }
+            : entry
+        )
+      );
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
   };
 
   return (
@@ -19,12 +52,12 @@ export default function Home() {
       </h1>
       <div className="flex flex-col items-center w-full max-w-3xl mt-20 mb-20 space-y-4 overflow-auto">
         {chatLog.length >= 1 && (
-          <div className="w-full bg-white mt-4 pt-4 pb-4 pl-10 pr-10 rounded-lg shadow-lg">
+          <div className="w-full bg-white pt-4 pb-4 pl-10 pr-10 rounded-lg shadow-lg">
             {chatLog.map((entry, index) => (
               <div key={index} className="mb-4">
                 <div className="flex justify-end">
                   <p className="bg-blue-100 text-gray-800 p-3 rounded-lg shadow-sm w-fit max-w-xs">
-                    <strong>You:</strong> {entry.user}
+                    <strong>User:</strong> {entry.user}
                   </p>
                 </div>
                 <div className="flex justify-start">
@@ -43,6 +76,7 @@ export default function Home() {
             type="text"
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Ask your travel question..."
             className="flex-1 px-4 py-2 border border-gray-200 bg-slate-50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
