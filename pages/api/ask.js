@@ -39,6 +39,8 @@ const detectIntent = async (question) => {
     - "What packages does your travel company offer?" -> proprietary
     - "What is the best time to visit Japan?" -> general
     - "Can you provide details on the family holiday packages available for Europe?" -> proprietary
+    - "Can you provide some packages available for family travel in this summer?" -> proprietary
+
     - "${question}" ->`;
 
   try {
