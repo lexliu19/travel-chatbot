@@ -1,6 +1,3 @@
-// In the detectIntent function, we use the OpenAI API to classify the user's question
-// as either "general" or "proprietary". We then return the intent as a string value.
-
 import axios from 'axios';
 
 const openaiApiKey = process.env.OPENAI_API_KEY;

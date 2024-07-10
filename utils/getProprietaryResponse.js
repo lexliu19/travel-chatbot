@@ -99,7 +99,7 @@ const getProprietaryResponse = async (question) => {
 
     if (!result || result.length === 0) {
       console.log('No matching records found in the database.');
-      return 'We do not offer this flight or package.';
+      return 'Currently we do not offer this flight or package 😔';
     }
 
     const isFlightQuery = query.toLowerCase().includes('from flights');
@@ -164,7 +164,7 @@ const getProprietaryResponse = async (question) => {
       'Error generating or executing query:',
       error.response ? error.response.data : error.message
     );
-    return 'We do not offer this flight or package.';
+    return 'Currently we do not offer this flight or package 😔';
   }
 };
 
