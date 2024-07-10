@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Home() {
@@ -50,7 +50,7 @@ export default function Home() {
       <h1 className="text-4xl font-bold mb-4 pt-4 pb-4 fixed top-0 bg-indigo-500 text-white w-full text-center">
         Travel Agent Chatbot
       </h1>
-      <div className="flex flex-col items-center w-full max-w-3xl mt-20 mb-20 space-y-4 overflow-auto">
+      <div className="flex flex-col items-center w-full max-w-3xl mt-24 mb-32 space-y-4 overflow-auto">
         {chatLog.length >= 1 && (
           <div className="w-full bg-white pt-4 pb-4 pl-10 pr-10 rounded-lg shadow-lg">
             {chatLog.map((entry, index) => (
@@ -70,7 +70,7 @@ export default function Home() {
           </div>
         )}
       </div>
-      <div className="fixed bottom-4 w-full flex justify-center p-4">
+      <div className="fixed bottom-0 w-full flex justify-center p-4 bg-gray-100">
         <div className="flex w-full max-w-md items-center space-x-4 bg-white p-4 rounded-lg shadow-md">
           <input
             type="text"
