@@ -57,12 +57,12 @@ export default function Home() {
               <div key={index} className="mb-4">
                 <div className="flex justify-end">
                   <p className="bg-blue-100 text-gray-800 p-3 rounded-lg shadow-sm w-fit max-w-xs">
-                    <strong>User:</strong> {entry.user}
+                    <strong>❓:</strong> {entry.user}
                   </p>
                 </div>
                 <div className="flex justify-start">
                   <p className="bg-gray-100 text-gray-800 p-3 rounded-lg shadow-sm w-fit max-w-xs">
-                    <strong>Bot:</strong> {entry.bot}
+                    <strong>🤖:</strong> {entry.bot}
                   </p>
                 </div>
               </div>
